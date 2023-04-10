@@ -1,5 +1,3 @@
-# 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
-
 import openai
 import streamlit as st
 from streamlit_chat import message
