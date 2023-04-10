@@ -70,7 +70,7 @@ st.write("<h6 style='text-align: left;'>Text Input</h6>", unsafe_allow_html=True
 container = st.container()
 with container:
     with st.form(key='my_form', clear_on_submit=True):
-        user_input1 = st.text_area(label='',key='input', height=100)
+        user_input1 = st.text_area(label='You:',key='input', height=100)
         submit_button = st.form_submit_button(label='Send')
 
 try:
