@@ -1,3 +1,5 @@
+# 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
+
 import openai
 import streamlit as st
 from streamlit_chat import message
@@ -9,14 +11,11 @@ from gtts import gTTS
 from io import BytesIO
 
 openai.api_key=st.secrets['api_secret']
+st.markdown("<h1 style='text-align: left;'>Universal Chatbot 🤖 - Let's Talk</h1>", unsafe_allow_html=True)
+st.write("<h6 style='text-align: right;'>-Designed and Made by Kshitij Kumar</h6>", unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center;'>Universal Chatbot </h2>", unsafe_allow_html=True)
-
-with st.columns(3)[1]:
-     st.image("download.jpeg")
-#st.markdown("![Alt Text](https://images.app.goo.gl/d6XYMRXebQNLqxSi7)")
-
-stt_button = Button(label="Speak",button_type="success",width=690,height=50)
+st.write("<h6 style='text-align: left;'>Press the button to ask question...</h6>", unsafe_allow_html=True)
+stt_button = Button(label="Click to Speak 🗣",button_type="success",width=690,height=50)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -64,23 +63,44 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
-user_input="Hello, how are you?"
 if result:
     if "GET_TEXT" in result:
         user_input=result.get("GET_TEXT")
-        st.text_input("You: ",user_input, key="input")
+        st.text_input("Your words: ",user_input, key="input")
 
-if user_input:
-    output=generate_response(user_input)
-    #store the output
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+container = st.container()
+with container:
+    with st.form(key='my_form', clear_on_submit=True):
+        user_input1 = st.text_area("You (Else write):", key='input', height=100)
+        submit_button = st.form_submit_button(label='Send')
 
-text = st.text_input("Answer:",output)
-sound_file = BytesIO()
-tts = gTTS(output,lang='en',slow=False)
-tts.write_to_fp(sound_file)
-st.audio(sound_file)
+try:
+    if user_input1 and submit_button:
+        output=generate_response(user_input1)
+        #store the output
+        st.session_state.past.append(user_input1)
+        st.session_state.generated.append(output)
+
+    elif user_input:
+        output=generate_response(user_input)
+        #store the output
+        st.session_state.past.append(user_input)
+        st.session_state.generated.append(output)
+except:pass
+
+try:
+    text = st.text_input("Answer 🔊:",output)
+    sound_file = BytesIO()
+    tts = gTTS(output,lang='en',slow=False)
+    tts.write_to_fp(sound_file)
+    st.audio(sound_file)
+except:pass
+clear_button = st.button("Clear Conversation", key="clear")
+# reset everything
+if clear_button:
+    st.session_state['generated'] = []
+    st.session_state['past'] = []
+    st.session_state['messages'] = [{"role": "system", "content": "You are a helpful assistant."}]
 
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
