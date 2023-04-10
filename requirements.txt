@@ -298,7 +298,6 @@ spacypdfreader==0.2.1
 SpeechRecognition==3.9.0
 split-folders==0.5.1
 SQLAlchemy==0.7.10
-sqlalchemy-migrate==0.11.0
 sqlparse==0.4.2
 srsly==2.4.3
 starlette==0.17.1
