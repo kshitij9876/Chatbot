@@ -80,7 +80,7 @@ try:
         st.session_state.past.append(user_input1)
         st.session_state.generated.append(output)
 
-    if user_input:
+    elif user_input:
         output=generate_response(user_input)
         #store the output
         st.session_state.past.append(user_input)
