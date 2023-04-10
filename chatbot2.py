@@ -1,4 +1,3 @@
-# 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
 
 import openai
 import streamlit as st
