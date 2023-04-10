@@ -12,8 +12,8 @@ openai.api_key=st.secrets['api_secret']
 st.markdown("<h1 style='text-align: left;'>Universal Chatbot 🤖 - Let's Talk</h1>", unsafe_allow_html=True)
 st.write("<h6 style='text-align: right;'>-Designed and Made by Kshitij Kumar</h6>", unsafe_allow_html=True)
 
-st.write("<h6 style='text-align: left;'>Press the button to ask question...</h6>", unsafe_allow_html=True)
-stt_button = Button(label="Click to Speak 🗣",button_type="success",width=690,height=50)
+st.write("<h6 style='text-align: left;'>Voice Input</h6>", unsafe_allow_html=True)
+stt_button = Button(label="Click to Speak 🗣",button_type="success",width=190,height=50)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -66,10 +66,11 @@ if result:
         user_input=result.get("GET_TEXT")
         st.text_input("Your words: ",user_input, key="input")
 
+st.write("<h6 style='text-align: left;'>Text Input</h6>", unsafe_allow_html=True)
 container = st.container()
 with container:
     with st.form(key='my_form', clear_on_submit=True):
-        user_input1 = st.text_area("You (Else write):", key='input', height=100)
+        user_input1 = st.text_area(label='',key='input', height=100)
         submit_button = st.form_submit_button(label='Send')
 
 try:
