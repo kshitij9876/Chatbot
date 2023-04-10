@@ -178,7 +178,6 @@ numpy==1.20.0
 oauthlib==3.1.1
 openai==0.26.5
 openai-whisper @ git+https://github.com/openai/whisper.git@7858aa9c08d98f75575035ecd6481f462d66ca27
-opencv-python==4.5.1.48
 openpyxl==3.0.9
 opt-einsum==3.3.0
 options==1.4.10
